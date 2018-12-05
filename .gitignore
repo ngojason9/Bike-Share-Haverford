@@ -1,0 +1,15 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment:
+env/
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# VSCode
+.vscode/
+settings.json
