@@ -1,0 +1,18 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - Bike Share Haverford</title>
+      {% else %}
+      <title>Welcome to Bike Share</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>Bike Share: 
+            <a href="/index">Home</a>
+            <a href="/login">Login</a>
+        </div>
+        
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
