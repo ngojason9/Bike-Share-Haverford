@@ -1,33 +1,37 @@
 <html>
-    <head>
-      {% if title %}
-      <title>{{ title }} - Bike Share Haverford</title>
-      {% else %}
-      <title>Welcome to Bike Share</title>
-      {% endif %}
-    </head>
-    <body>
-        <div>Bike Share: 
-            <a href=" {{ url_for('index') }} ">Home</a>
-            {% if current_user.is_anonymous %}
-            <a href=" {{ url_for('login') }} ">Login</a>
-            {% else %}
-            <a href=" {{ url_for('logout') }} ">Logout</a>
-            {% endif %}
-        </div>
-        
-        <hr>
 
-        {% with messages = get_flashed_messages() %}
-        {% if messages %}
-        <u1>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </u1>
+<head>
+    {% if title %}
+    <title>{{ title }} - Bike Share Haverford</title>
+    {% else %}
+    <title>Welcome to Bike Share</title>
+    {% endif %}
+</head>
+
+<body>
+    <div>Bike Share:
+        <a href=" {{ url_for('index') }} ">Home</a>
+        {% if current_user.is_anonymous %}
+        <a href=" {{ url_for('login') }} ">Login</a>
+        {% else %}
+        <a href=" {{ url_for('user', username=current_user.username) }} ">Profile</a>
+        <a href=" {{ url_for('logout') }} ">Logout</a>
         {% endif %}
-        {% endwith %}
+    </div>
 
-        {% block content %}{% endblock %}
-    </body>
+    <hr>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <u1>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </u1>
+    {% endif %}
+    {% endwith %}
+
+    {% block content %}{% endblock %}
+</body>
+
 </html>
