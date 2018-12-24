@@ -1,1 +1,2 @@
 FLASK_APP=bikeshare.py
+FLASK_DEBUG=1
