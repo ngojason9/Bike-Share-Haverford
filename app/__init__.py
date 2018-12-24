@@ -3,8 +3,16 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from config import Config
 from flask import Flask
+
+# Error Handling
 from logging.handlers import RotatingFileHandler
 import os
+import logging
+from logging.handlers import SMTPHandler
+
+from flask_mail import Mail
+
+from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 
@@ -13,8 +21,8 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 login.login_view = 'login'
-
-from app import routes, models, errors
+mail = Mail(app)
+bootstrap = Bootstrap(app)
 
 if not app.debug:
     if not os.path.exists('logs'):
@@ -28,3 +36,5 @@ if not app.debug:
 
     app.logger.setLevel(logging.INFO)
     app.logger.info('Bikeshare Haverford')
+
+from app import routes, models, errors
