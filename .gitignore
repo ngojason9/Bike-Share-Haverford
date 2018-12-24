@@ -13,3 +13,6 @@ instance/
 # VSCode
 .vscode/
 settings.json
+
+# Testing stuff
+.testuser
