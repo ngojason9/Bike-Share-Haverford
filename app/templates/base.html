@@ -1,37 +1,37 @@
-<html>
+{% extends 'bootstrap/base.html' %}
 
-<head>
-    {% if title %}
-    <title>{{ title }} - Bike Share Haverford</title>
+{% block title %}
+{% if title %}
+<title>{{ title }} - Bike Share Haverford</title>
+{% else %}
+<title>Welcome to Bike Share</title>
+{% endif %}
+{% endblock %}
+
+{% block navbar %}
+<nav class="navbar navbar-fixed-top">
+    Bike Share:
+    <a href=" {{ url_for('index') }} ">Home</a>
+    {% if current_user.is_anonymous %}
+    <a href=" {{ url_for('login') }} ">Login</a>
     {% else %}
-    <title>Welcome to Bike Share</title>
+    <a href=" {{ url_for('user', username=current_user.username) }} ">Profile</a>
+    <a href=" {{ url_for('logout') }} ">Logout</a>
     {% endif %}
-</head>
+</nav>
+{% endblock %}
 
-<body>
-    <div>Bike Share:
-        <a href=" {{ url_for('index') }} ">Home</a>
-        {% if current_user.is_anonymous %}
-        <a href=" {{ url_for('login') }} ">Login</a>
-        {% else %}
-        <a href=" {{ url_for('user', username=current_user.username) }} ">Profile</a>
-        <a href=" {{ url_for('logout') }} ">Logout</a>
-        {% endif %}
-    </div>
-
-    <hr>
-
+{% block content %}
+<div class="container">
     {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <u1>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </u1>
-    {% endif %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
     {% endwith %}
 
-    {% block content %}{% endblock %}
-</body>
-
-</html>
+    {# application content needs to be provided in the app_content block #}
+    {% block app_content %}{% endblock %}
+</div>
+{% endblock %}
