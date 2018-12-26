@@ -39,6 +39,22 @@ class User(UserMixin, db.Model):
         return User.query.get(id)
 
 
+class Bike(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    number = db.Column(db.Integer, index=True, unique=True)
+
+    status = db.Column(db.Integer) # {0: 'out of service, 1: 'available', 2: 'in use'}
+
+    # in_service = db.Column(db.Boolean)  # all functioning bikes
+    # in_use = db.Column(db.Boolean)  # all available bikes up for grab
+    
+    last_used = db.Column(db.DateTime)
+    last_used_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def __repr__(self):
+        return '<Bike #{}>'.format(self.number)
+
+
 class Post(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     body = db.Column(db.String(140))
