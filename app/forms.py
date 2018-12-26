@@ -1,10 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from app.models import User
 
 
 class CheckInForm(FlaskForm):
+    location = SelectField('Bike Location', choices=[(
+        'ND', 'North Dorms'), ('APT', 'Apartments')], validators=[DataRequired()])
     bike = IntegerField('Bike Number', validators=[DataRequired()])
     submit = SubmitField('Check In')
 
@@ -22,7 +24,8 @@ class RegistrationForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     password2 = PasswordField(
         'Repeat Password', validators=[DataRequired(), EqualTo('password')])
-    honor_code_agreement = BooleanField('Agree to abide by Honor Code using the program', validators=[DataRequired()])
+    honor_code_agreement = BooleanField(
+        'Agree to abide by Honor Code using the program', validators=[DataRequired()])
     submit = SubmitField('Register')
 
     def validate_username(self, username):

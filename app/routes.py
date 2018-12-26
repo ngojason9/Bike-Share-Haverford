@@ -1,7 +1,7 @@
 from app.email import send_password_reset_email
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
+from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm, CheckInForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from werkzeug.urls import url_parse
@@ -12,11 +12,19 @@ from datetime import datetime
 @app.route("/index")
 @login_required
 def index():
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template("index.html", title='Home Page', posts=posts)
+    # posts = [
+    #     {'author': user, 'body': 'Test post #1'},
+    #     {'author': user, 'body': 'Test post #2'}
+    # ]
+    form = CheckInForm()
+    
+    if form.validate_on_submit():
+        bike = form.bike.data
+        location = form.bike.location.data
+        flash('Congratulations, you are now checked in!')
+        return redirect(url_for('index'))
+
+    return render_template("index.html", title='Home Page', form=form)
 
 
 @app.route("/login", methods=['GET', 'POST'])
