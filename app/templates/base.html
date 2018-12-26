@@ -1,41 +1,42 @@
 {% extends 'bootstrap/base.html' %}
 
-{% block styles %}
-{{super()}}
-<link rel="stylesheet" href="{{url_for('.static', filename='style.css')}}">
-{% endblock %}
-
-{% block title %}
-    Bike Share - Haverford College
+{% block head %}
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <title>Bike Share - Haverford College</title>
+    {% block styles %}
+        {{super()}}
+        <link rel="stylesheet" href="{{url_for('.static', filename='style.css')}}">
+    {% endblock %}
 {% endblock %}
 
 
 {% block body %}
-    {% block navbar %}
-    <nav class="navbar navbar-light bg-light navbar-custom">
-        <a href=" {{ url_for('index') }} ">Home</a>
-        {% if current_user.is_anonymous %}
-        <a href=" {{ url_for('login') }} ">Login</a>
-        {% else %}
-        <a href=" {{ url_for('user', username=current_user.username) }} ">Profile</a>
-        <a href=" {{ url_for('logout') }} ">Logout</a>
-        {% endif %}
-    </nav>
-    {% endblock %}
+{% block navbar %}
+<nav class="navbar navbar-light bg-light navbar-custom">
+    <a href=" {{ url_for('index') }} ">Home</a>
+    {% if current_user.is_anonymous %}
+    <a href=" {{ url_for('login') }} ">Login</a>
+    {% else %}
+    <a href=" {{ url_for('user', username=current_user.username) }} ">Profile</a>
+    <a href=" {{ url_for('logout') }} ">Logout</a>
+    {% endif %}
+</nav>
+{% endblock %}
 
-    {% block content %}
-    <div class="container">
-        {% with messages = get_flashed_messages() %}
+{% block content %}
+<div class="container">
+    {% with messages = get_flashed_messages() %}
         {% if messages %}
-        {% for message in messages %}
-        <div class="alert alert-info" role="alert">{{ message }}</div>
-        {% endfor %}
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">{{ message }}</div>
+            {% endfor %}
         {% endif %}
-        {% endwith %}
+    {% endwith %}
 
-        {# application content needs to be provided in the app_content block #}
-        {% block app_content %}{% endblock %}
-    </div>
+    {% block app_content %}
+        {# app content goes here #}
     {% endblock %}
+</div>
+{% endblock %}
 
 {% endblock %}
