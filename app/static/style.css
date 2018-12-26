@@ -6,16 +6,16 @@ body {
     background-size: cover;
 }
 
-title, h1, h2, h3, h4, h5, h6, p {
+title, h1, h2, h3, h4, h5, h6, p, a, form {
     color: white;
 }
 
-a {
+#footer {
     color: white;
-}
-
-form {
-    color: white;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    text-align: right;
 }
 
 .navbar {
