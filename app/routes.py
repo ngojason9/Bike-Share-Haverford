@@ -1,7 +1,7 @@
 from app.email import send_password_reset_email
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm
+from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User
 from werkzeug.urls import url_parse
@@ -26,12 +26,6 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
-        """
-        The result of filter_by() is a query that only includes the objects that
-        have a matching username. Since I know there is only going to be one or 
-        zero results, I complete the query by calling first(), which will return
-         the user object if it exists, or None if it does not.
-        """
         user = User.query.filter_by(username=form.username.data).first()
 
         if user is None or not user.check_password(form.password.data):
@@ -100,8 +94,6 @@ def reset_password_request():
     return render_template('reset_password_request.html',
                            title='Reset Password', form=form)
 
-
-from app.forms import ResetPasswordForm
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):

@@ -10,11 +10,17 @@ title, h1, h2, h3, h4, h5, h6, p {
     color: white;
 }
 
-.navbar-custom {
-    color: white;
-    font-size: 15px;
-}
-
 a {
     color: white;
+}
+
+form {
+    color: white;
+}
+
+.navbar {
+    color: white;
+    font-size: 20px;
+    margin: 20px;
+    word-spacing: 10px;
 }
