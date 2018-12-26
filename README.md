@@ -16,7 +16,7 @@ First, clone the repository to your local machine
 ```
 $ git clone https://github.com/ngojason9/Bike-Share-Haverford/
 ```
-Activate the virtual environment. If you are on Linux/MacOS, use the command `source env/bin/activate`. If you are on Windows, use `env\Scripts\activate`.
+Activate the virtual environment. If you are on Linux/MacOS, use the command `$ source env/bin/activate`. If you are on Windows, use `$ env\Scripts\activate`.
 
 Install all dependencies via the command
 ```
@@ -24,10 +24,9 @@ $ pip install -r requirements.txt
 ```
 
 ### Usage
-Home Page:
-![Haverford Bike Share Program Home Page](/screenshots/index_page.png?raw=true "Home Page")
+<img src="/screenshots/index_page.png" alt="Home Page" width="50%" height="50%">
 
-## Deployment
+<!-- ![Haverford Bike Share Program Home Page](/screenshots/index_page.png?raw=true "Home Page") -->
 
 
 ## Acknowledgement
