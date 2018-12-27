@@ -1,13 +1,20 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
-from app.models import User
+from app.models import User, Bike
 
 
 class CheckInForm(FlaskForm):
     location = SelectField('Bike Location', choices=[(
         'ND', 'North Dorms'), ('APT', 'Apartments')], validators=[DataRequired()])
-    bike = IntegerField('Bike Number', validators=[DataRequired()])
+    available_bikes = Bike.query.filter_by(status='available')
+
+    # create a tuple of (bike, bike number) and add it to the drop down menu:
+    choices = []
+    for bike in available_bikes:
+        choices.append((bike, bike.number))
+    bike = SelectField('Available Bikes', choices=choices,
+                       validators=[DataRequired()])
     submit = SubmitField('Check In')
 
 
@@ -35,8 +42,11 @@ class RegistrationForm(FlaskForm):
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
-        if user is not None:
+        if user is not None:    # check for duplicate emails
             raise ValidationError('Please use a different email address.')
+        domain = email.data.split('@')[1]
+        if domain != "haverford.edu":
+            raise ValidationError('Please use your Haverford email address.')
 
 
 class ResetPasswordRequestForm(FlaskForm):

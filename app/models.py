@@ -11,7 +11,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
+    last_bike = db.relationship('Bike', backref='last_bike', lazy='dynamic')
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -42,28 +42,14 @@ class User(UserMixin, db.Model):
 class Bike(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer, index=True, unique=True)
-
-    status = db.Column(db.Integer) # {0: 'out of service, 1: 'available', 2: 'in use'}
-
-    # in_service = db.Column(db.Boolean)  # all functioning bikes
-    # in_use = db.Column(db.Boolean)  # all available bikes up for grab
-    
-    last_used = db.Column(db.DateTime)
+    status = db.Column(db.Enum('out of service', 'available', 'in use', name='status'), default='available')
+    last_used = db.Column(db.DateTime, default=None)
     last_used_by = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        return '<Bike #{}>'.format(self.number)
-
-
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def __repr__(self):
-        return '<Post {}>'.format(self.body)
-
+        if self.status == 'in use':
+            return '<Bike #{}>, in use by {}'.format(self.number, self.last_used_by.username)
+        return '<Bike #{}>, status: {}'.format(self.number, self.status)
 
 @login.user_loader
 def load_user(id):

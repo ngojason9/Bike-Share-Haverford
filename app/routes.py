@@ -3,7 +3,7 @@ from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm, CheckInForm
 from flask_login import current_user, login_user, logout_user, login_required
-from app.models import User
+from app.models import User, Bike
 from werkzeug.urls import url_parse
 from datetime import datetime
 
@@ -12,17 +12,12 @@ from datetime import datetime
 @app.route("/index")
 @login_required
 def index():
-    # posts = [
-    #     {'author': user, 'body': 'Test post #1'},
-    #     {'author': user, 'body': 'Test post #2'}
-    # ]
     form = CheckInForm()
-    
     if form.validate_on_submit():
         bike = form.bike.data
         location = form.bike.location.data
         flash('Congratulations, you are now checked in!')
-        return redirect(url_for('index'))
+        return redirect(url_for('timer'))
 
     return render_template("index.html", title='Home Page', form=form)
 
@@ -74,11 +69,7 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = [
-        {'author': user, 'body': 'Test post #1'},
-        {'author': user, 'body': 'Test post #2'}
-    ]
-    return render_template('user.html', user=user, posts=posts)
+    return render_template('user.html', user=user)
 
 
 @app.before_request
