@@ -8,19 +8,29 @@ from werkzeug.urls import url_parse
 from datetime import datetime
 
 
-@app.route("/")
-@app.route("/index")
+@app.route("/", methods=['GET', 'POST'])
+@app.route("/index", methods=['GET', 'POST'])
 @login_required
 def index():
     form = CheckInForm()
     if form.validate_on_submit():
-        bike = form.bike.data
-        location = form.bike.location.data
+        # location = form.location.data
+
+        bike = Bike.query.filter_by(id=form.bike.data)
+        bike.status = 'in use'
+        bike.last_used_by = current_user.id
+
+        db.session.commit()
+
         flash('Congratulations, you are now checked in!')
         return redirect(url_for('timer'))
 
     return render_template("index.html", title='Home Page', form=form)
 
+
+@app.route('/timer', methods=['GET', 'POST'])
+def timer():
+    return render_template('timer.html')
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():

@@ -12,9 +12,9 @@ class CheckInForm(FlaskForm):
     # create a tuple of (bike, bike number) and add it to the drop down menu:
     choices = []
     for bike in available_bikes:
-        choices.append((bike, bike.number))
+        choices.append((bike.id, bike.number))
     bike = SelectField('Available Bikes', choices=choices,
-                       validators=[DataRequired()])
+                       validators=[DataRequired()], coerce=int)
     submit = SubmitField('Check In')
 
 

@@ -48,8 +48,8 @@ class Bike(db.Model):
 
     def __repr__(self):
         if self.status == 'in use':
-            return '<Bike #{}>, in use by {}'.format(self.number, self.last_used_by.username)
-        return '<Bike #{}>, status: {}'.format(self.number, self.status)
+            return '<Bike #{}>, in use by {}>'.format(self.number, self.last_used_by.username)
+        return '<Bike #{}>, status: {}>'.format(self.number, self.status)
 
 @login.user_loader
 def load_user(id):
