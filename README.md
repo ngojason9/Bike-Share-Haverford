@@ -24,10 +24,14 @@ $ pip install -r requirements.txt
 ```
 
 ### Usage
-<img src="/screenshots/index_page.png" alt="Home Page" width="50%" height="50%">
+#### Home Page
+![Haverford Bike Share Program Home Page](/screenshots/index_page.png?raw=true "Home Page")
 
-<!-- ![Haverford Bike Share Program Home Page](/screenshots/index_page.png?raw=true "Home Page") -->
+#### Timer Starts
+![Haverford Bike Share Program Timer Page](/screenshots/timer_page.png?raw=true "Timer Page")
 
+
+## Deployment
 
 ## Acknowledgement
 
