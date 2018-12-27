@@ -1,6 +1,8 @@
 # Bike Share Program
 The Flask Web App streamlines the check-in/check-out process for Haverford Bike Share Program.
 
+*The web app is still in development and is not ready for deployment. Contribution to the app is appreciated.*
+
 ## Getting Started
 
 ### Introduction
