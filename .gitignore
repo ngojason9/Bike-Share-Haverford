@@ -16,3 +16,6 @@ settings.json
 
 # Testing stuff
 .testuser
+
+# Database stuff
+migrations/
