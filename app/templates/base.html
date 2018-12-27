@@ -46,4 +46,10 @@
         {% endblock %}
 </div>
 
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    <script src="/static/moment.min.js"></script>
+{% endblock %}
+
 {% endblock %}
