@@ -26,6 +26,8 @@ $ pip install -r requirements.txt
 ```
 
 ### Usage
+Now that you have installed all the dependencies, run the command `$ flask run` in the virtual environment to test the application.
+
 #### Home Page
 ![Haverford Bike Share Program Home Page](/screenshots/home_page.png?raw=true "Home Page")
 
