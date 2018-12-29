@@ -5,7 +5,7 @@ from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, Res
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Bike
 from werkzeug.urls import url_parse
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -23,8 +23,12 @@ def index():
         db.session.commit()
 
         flash('Congratulations, you are now checked in!')
-        return redirect(url_for('timer'))
 
+        check_in_time = datetime.utcnow()
+        due_time = check_in_time + timedelta(hours=6)
+
+        # return redirect(url_for('timer'))
+        return render_template("timer.html", check_in_time=check_in_time, due_time=due_time)
     return render_template("index.html", title='Home Page', form=form)
 
 

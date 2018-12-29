@@ -27,9 +27,10 @@ $ pip install -r requirements.txt
 
 ### Usage
 #### Home Page
-![Haverford Bike Share Program Home Page](/screenshots/index_page.png?raw=true "Home Page")
+![Haverford Bike Share Program Home Page](/screenshots/home_page.png?raw=true "Home Page")
 
 #### Timer Starts
+*Note: In the near future, there will be a countdown timer on this page. Stay tuned!*
 ![Haverford Bike Share Program Timer Page](/screenshots/timer_page.png?raw=true "Timer Page")
 
 

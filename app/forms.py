@@ -13,7 +13,7 @@ class CheckInForm(FlaskForm):
     choices = []
     for bike in available_bikes:
         choices.append((bike.id, bike.number))
-    bike = SelectField('Available Bikes', choices=choices,
+    bike = SelectField('Bike Number', choices=choices,
                        validators=[DataRequired()], coerce=int)
     submit = SubmitField('Check In')
 

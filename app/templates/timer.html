@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
+<script>
+    var check_in_time = {{check_in_time}} ;
+    var due_time = {{ due_time }}
+</script>
+
 {% block app_content %}
 <h2>You have 6 hours!</h2>
-<p>Timer will goes here.</p>
-    
+<p>Time checked-in:  {{ moment(check_in_time).format('LLL') }} </p>
+<p>Time due: {{ moment(due_time).format('LLL') }} </p>
 {% endblock %}
