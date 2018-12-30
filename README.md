@@ -1,8 +1,6 @@
 # Bike Share Program
 The Flask Web App streamlines the check-in/check-out process for Haverford Bike Share Program.
 
-*The web app is still in development and is not ready for deployment. Contribution to the app is appreciated.*
-
 ## Getting Started
 
 ### Introduction
@@ -26,7 +24,6 @@ Finally, install all dependencies via the command
 ```
 $ pip install -r requirements.txt
 ```
-*Note: make sure you are working with* `Python 3`, *as some packages are not available for* `Python 2`.
 
 ### Usage
 Now that you have installed all the dependencies, run the command `$ flask run` in the virtual environment to test the application.
@@ -40,7 +37,6 @@ Now that you have installed all the dependencies, run the command `$ flask run` 
 
 
 ## Deployment
+*The web app is still in development and is not ready for deployment. Contribution to the app is appreciated.*
 
 ## Acknowledgement
-
-## License
