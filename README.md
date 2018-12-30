@@ -18,12 +18,15 @@ First, clone the repository to your local machine
 ```
 $ git clone https://github.com/ngojason9/Bike-Share-Haverford/
 ```
-Activate the virtual environment. If you are on Linux/MacOS, use the command `$ source env/bin/activate`. If you are on Windows, use `$ env\Scripts\activate`.
+Next, go to the directory and create a new virtual enviroment with `virtualenv env`.
 
-Install all dependencies via the command
+Then, activate the virtual environment. If you are on Linux/MacOS, use the command `$ source env/bin/activate`. If you are on Windows, use `$ env\Scripts\activate`.
+
+Finally, install all dependencies via the command
 ```
 $ pip install -r requirements.txt
 ```
+*Note: make sure you are working with* `Python 3`, *as some packages are not available for* `Python 2`.
 
 ### Usage
 Now that you have installed all the dependencies, run the command `$ flask run` in the virtual environment to test the application.
