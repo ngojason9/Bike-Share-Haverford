@@ -18,7 +18,7 @@ First, clone the repository to your local machine
 ```
 $ git clone https://github.com/ngojason9/Bike-Share-Haverford/
 ```
-Next, go to the directory and create a new virtual enviroment with `virtualenv env`.
+Next, go to the directory and create a new Python 3 virtual enviroment `virtualenv -p python3 env`.
 
 Then, activate the virtual environment. If you are on Linux/MacOS, use the command `$ source env/bin/activate`. If you are on Windows, use `$ env\Scripts\activate`.
 
