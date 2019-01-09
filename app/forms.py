@@ -3,6 +3,10 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, Integ
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from app.models import User, Bike
 
+class CheckOutForm(FlaskForm):
+    location = SelectField('Bike Location', choices=[(
+        'ND', 'North Dorms'), ('APT', 'Apartments')], validators=[DataRequired()])
+    submit = SubmitField('Check Out')
 
 class CheckInForm(FlaskForm):
     location = SelectField('Bike Location', choices=[(

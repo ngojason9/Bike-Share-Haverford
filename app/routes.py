@@ -1,7 +1,7 @@
 from app.email import send_password_reset_email
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm, CheckInForm
+from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm, CheckInForm, CheckOutForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Bike
 from werkzeug.urls import url_parse
@@ -19,24 +19,29 @@ def index():
         bike = Bike.query.filter_by(id=form.bike.data)
         bike.status = 'in use'
         bike.last_used_by = current_user.id
+        check_in_time = datetime.now()
+        due_time = datetime.now() + timedelta(hours=6)
 
         db.session.commit()
 
         flash('Congratulations, you are now checked in!')
 
-        check_in_time = datetime.now().strftime('%b %d, %Y %I:%M %p')
-        due_time = (datetime.now() + timedelta(hours=6)
-                    ).strftime('%b %d, %Y %I:%M %p')
+        return redirect(url_for('timer', check_in_time=check_in_time.strftime('%b %d, %Y %I:%M %p'), due_time=due_time.strftime('%b %d, %Y %I:%M %p')))
 
-        return redirect(url_for('timer', check_in_time=check_in_time, due_time=due_time))
-    return render_template("index.html", title='Home Page', form=form)
+    return render_template("index.html", form=form)
 
 
 @app.route('/timer', methods=['GET', 'POST'])
 def timer():
     check_in_time = request.args.get('check_in_time')
     due_time = request.args.get('due_time')
-    return render_template('timer.html', check_in_time=check_in_time, due_time=due_time)
+
+    form = CheckOutForm()
+    if form.validate_on_submit():
+        flash('Check out sucessfully!')
+        return redirect(url_for('index'))
+
+    return render_template('timer.html', form=form, check_in_time=check_in_time, due_time=due_time, seconds=6*3600)
 
 
 @app.route("/login", methods=['GET', 'POST'])
