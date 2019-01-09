@@ -1,8 +1,12 @@
+from flask import Flask
+from config import Config
+
+# Flask Plug-ins
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from config import Config
-from flask import Flask
+from flask_mail import Mail
+from flask_bootstrap import Bootstrap
 
 # Error Handling
 from logging.handlers import RotatingFileHandler
@@ -10,9 +14,6 @@ import os
 import logging
 from logging.handlers import SMTPHandler
 
-from flask_mail import Mail
-
-from flask_bootstrap import Bootstrap
 
 app = Flask(__name__)
 
