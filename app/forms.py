@@ -1,8 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField, TextAreaField
 from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
 from app.models import User, Bike
 
+class ContactForm(FlaskForm):
+    message = TextAreaField('Message', render_kw={"rows": 5})
+    submit = SubmitField('Send')
+    
 class CheckOutForm(FlaskForm):
     location = SelectField('Bike Location', choices=[(
         'ND', 'North Dorms'), ('APT', 'Apartments')], validators=[DataRequired()])

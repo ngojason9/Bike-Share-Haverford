@@ -1,7 +1,7 @@
 from app.email import send_password_reset_email
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm, CheckInForm, CheckOutForm
+from app.forms import LoginForm, RegistrationForm, ResetPasswordRequestForm, ResetPasswordForm, CheckInForm, CheckOutForm, ContactForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Bike
 from werkzeug.urls import url_parse
@@ -130,3 +130,12 @@ def reset_password(token):
         flash('Your password has been reset.')
         return redirect(url_for('login'))
     return render_template('reset_password.html', form=form)
+
+@app.route('/contact', methods=['GET', 'POST'])
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        flash('Thank you for your message!')
+        return redirect(url_for('index'))
+        
+    return render_template('contact.html', form=form)
