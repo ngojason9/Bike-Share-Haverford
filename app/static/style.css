@@ -24,3 +24,21 @@ title, h1, h2, h3, h4, h5, h6, p, a, form {
     margin: 20px;
     word-spacing: 10px;
 }
+
+.timer {
+    height: 85%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: FranklinGothic, Verdana, Arial, sans-serif;
+    font-size: 120px;
+    font-weight: bold;
+    color: #000;
+}
