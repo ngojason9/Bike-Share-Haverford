@@ -37,10 +37,4 @@ if not app.debug:
     app.logger.setLevel(logging.INFO)
     app.logger.info('Bikeshare Haverford')
 
-from flask_moment import Moment
-moment = Moment(app)
-
-from .momentjs import momentjs
-app.jinja_env.globals['momentjs'] = momentjs
-
 from app import routes, models, errors

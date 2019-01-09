@@ -2,5 +2,5 @@
 
 {% block app_content %}
     <h1>Activities for {{ user.username }}</h1>
-    <p>Last seen on: {{ moment(user.last_seen).format('LLL') }} </p>
+    <p>Last seen on: {{ user.last_seen.strftime('%b %d, %Y %I:%M %p') }} </p>
 {% endblock %}
