@@ -16,7 +16,7 @@ First, clone the repository to your local machine
 ```
 $ git clone https://github.com/ngojason9/Bike-Share-Haverford/
 ```
-Next, go to the directory and create a new Python 3 virtual enviroment `virtualenv -p python3 env`.
+Next, go to the directory and create a new Python 3 virtual enviroment `$ virtualenv -p python3 env`.
 
 Then, activate the virtual environment. If you are on Linux/MacOS, use the command `$ source env/bin/activate`. If you are on Windows, use `$ env\Scripts\activate`.
 
@@ -32,7 +32,6 @@ Now that you have installed all the dependencies, run the command `$ flask run` 
 ![Haverford Bike Share Program Home Page](/screenshots/home_page.png?raw=true "Home Page")
 
 #### Timer Starts
-*Note: In the near future, there will be a countdown timer on this page. Stay tuned!*
 ![Haverford Bike Share Program Timer Page](/screenshots/timer_page.png?raw=true "Timer Page")
 
 
