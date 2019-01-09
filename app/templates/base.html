@@ -45,11 +45,4 @@
         {% endblock %}
 </div>
 
-{% block scripts %}
-    {{ super() }}
-    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='timer.js') }}"></script>
-
-{% endblock %}
-
 {% endblock %}
