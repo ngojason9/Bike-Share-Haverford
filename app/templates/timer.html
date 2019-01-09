@@ -8,6 +8,17 @@
 
 {% block app_content %}
 <h2>You have 6 hours!</h2>
-<p>Time checked-in:  {{ moment(check_in_time).format('LLL') }} </p>
-<p>Time due: {{ moment(due_time).format('LLL') }} </p>
+<p>Time checked-in: {{ check_in_time }} </p>
+<p>Time due: {{ due_time }} </p>
+
+<div class="timer">
+    <p id="time"></p>
+</div>
+
+{% block scripts %}
+<script>
+    var Seconds = {{ num }};
+</script>
+{% endblock %}
+
 {% endblock %}

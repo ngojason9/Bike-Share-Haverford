@@ -24,17 +24,20 @@ def index():
 
         flash('Congratulations, you are now checked in!')
 
-        check_in_time = datetime.utcnow()
-        due_time = check_in_time + timedelta(hours=6)
+        check_in_time = datetime.now().strftime('%b %d, %Y %I:%M %p')
+        due_time = (datetime.now() + timedelta(hours=6)
+                    ).strftime('%b %d, %Y %I:%M %p')
 
-        # return redirect(url_for('timer'))
-        return render_template("timer.html", check_in_time=check_in_time, due_time=due_time)
+        return redirect(url_for('timer', check_in_time=check_in_time, due_time=due_time))
     return render_template("index.html", title='Home Page', form=form)
 
 
 @app.route('/timer', methods=['GET', 'POST'])
 def timer():
-    return render_template('timer.html')
+    check_in_time = request.args.get('check_in_time')
+    due_time = request.args.get('due_time')
+    return render_template('timer.html', check_in_time=check_in_time, due_time=due_time)
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
