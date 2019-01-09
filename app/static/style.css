@@ -35,8 +35,5 @@ title, h1, h2, h3, h4, h5, h6, p, a, form {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
-    color: #000;
+    font-size: 60px;
 }
