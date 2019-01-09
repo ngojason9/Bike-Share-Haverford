@@ -1,11 +1,6 @@
 {% extends "base.html" %}
 {% import 'bootstrap/wtf.html' as wtf %}
 
-<script>
-    var check_in_time = {{check_in_time}} ;
-    var due_time = {{ due_time }}
-</script>
-
 {% block app_content %}
 <h2>You have 6 hours!</h2>
 <p>Time checked-in: {{ check_in_time }} </p>
@@ -16,8 +11,11 @@
 </div>
 
 {% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+<script src="{{ url_for('static', filename='timer.js') }}"></script>
 <script>
-    var Seconds = {{ num }};
+    var Seconds = {{ seconds }};
 </script>
 {% endblock %}
 

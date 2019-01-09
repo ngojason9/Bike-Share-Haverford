@@ -37,8 +37,6 @@ title, h1, h2, h3, h4, h5, h6, p, a, form {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: FranklinGothic, Verdana, Arial, sans-serif;
-    font-size: 120px;
-    font-weight: bold;
+    font-size: 80px;
     color: #000;
 }
