@@ -5,7 +5,7 @@
     <title>Bike Share - Haverford College</title>
     {% block styles %}
         {{super()}}
-        <link rel="stylesheet" href="{{url_for('.static', filename='style.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
     {% endblock %}
 
 {% endblock %}
@@ -49,6 +49,9 @@
     {{ super() }}
     {{ moment.include_moment() }}
     <script src="/static/moment.min.js"></script>
+    <script src="{{ url_for('static', filename='jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='timer.js') }}"></script>
+
 {% endblock %}
 
 {% endblock %}
