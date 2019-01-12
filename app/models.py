@@ -12,7 +12,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
     withholding_bike = db.relationship('Bike', backref='user', lazy='dynamic')
-    last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    last_seen = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -51,6 +51,12 @@ class Bike(db.Model):
             return '<Bike #{}>, in use by {}>'.format(self.number, self.last_used_by.username)
         return '<Bike #{}>, status: {}>'.format(self.number, self.status)
 
+class Log(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    check_in = db.Column(db.DateTime)
+    check_out = db.Column(db.DateTime)
+    user = db.Column(db.String(64))
+    bike = db.Column(db.Integer)
 
 @login.user_loader
 def load_user(id):
