@@ -11,7 +11,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    last_bike = db.relationship('Bike', backref='last_bike', lazy='dynamic')
+    withholding_bike = db.relationship('Bike', backref='user', lazy='dynamic')
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
 
     def __repr__(self):
@@ -42,13 +42,15 @@ class User(UserMixin, db.Model):
 class Bike(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer, index=True, unique=True)
-    status = db.Column(db.Enum('out of service', 'available', 'in use', name='status'), default='available')
+    status = db.Column(db.Enum('out of service', 'available',
+                               'in use', name='status'), default='available')
     holder = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         if self.status == 'in use':
             return '<Bike #{}>, in use by {}>'.format(self.number, self.last_used_by.username)
         return '<Bike #{}>, status: {}>'.format(self.number, self.status)
+
 
 @login.user_loader
 def load_user(id):
