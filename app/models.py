@@ -43,8 +43,7 @@ class Bike(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     number = db.Column(db.Integer, index=True, unique=True)
     status = db.Column(db.Enum('out of service', 'available', 'in use', name='status'), default='available')
-    last_used = db.Column(db.DateTime, default=None)
-    last_used_by = db.Column(db.Integer, db.ForeignKey('user.id'))
+    holder = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         if self.status == 'in use':
