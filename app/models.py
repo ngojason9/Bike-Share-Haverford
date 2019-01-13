@@ -47,9 +47,7 @@ class Bike(db.Model):
     holder = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
-        if self.status == 'in use':
-            return '<Bike #{}>, in use by {}>'.format(self.number, self.last_used_by.username)
-        return '<Bike #{}>, status: {}>'.format(self.number, self.status)
+        return '<Bike #{}, status: {}>'.format(self.number, self.status)
 
 class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
