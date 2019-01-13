@@ -49,12 +49,14 @@ class Bike(db.Model):
     def __repr__(self):
         return '<Bike #{}, status: {}>'.format(self.number, self.status)
 
+
 class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     check_in = db.Column(db.DateTime)
     check_out = db.Column(db.DateTime)
     user = db.Column(db.String(64))
     bike = db.Column(db.Integer)
+
 
 @login.user_loader
 def load_user(id):
