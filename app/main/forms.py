@@ -1,8 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, IntegerField, SelectField, TextAreaField
-from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
+from wtforms import StringField, BooleanField, SubmitField, IntegerField, SelectField, TextAreaField
+from wtforms.validators import DataRequired
 from app.models import User, Bike
-
 
 class ContactForm(FlaskForm):
     message = TextAreaField('Message', render_kw={"rows": 5})
