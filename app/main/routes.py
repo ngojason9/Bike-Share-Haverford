@@ -13,6 +13,12 @@ from datetime import datetime, timedelta
 @login_required
 def index():
     form = CheckInForm()
+    available_bikes = Bike.query.filter_by(status='available')
+    choices = []
+    for bike in available_bikes:
+        choices.append((bike.id, bike.number))
+    form.bike.choices = choices
+
     if form.validate_on_submit():
         # location = form.location.data
 
