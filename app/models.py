@@ -44,7 +44,6 @@ class Bike(db.Model):
     number = db.Column(db.Integer, index=True, unique=True)
     status = db.Column(db.Enum('out of service', 'available',
                                'in use', name='status'), default='available')
-    location = db.Column(db.String(64), default="Apartments")
     holder = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
