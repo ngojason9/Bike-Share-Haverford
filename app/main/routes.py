@@ -6,11 +6,13 @@ from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Bike, Log
 from werkzeug.urls import url_parse
 from datetime import datetime, timedelta
+from app.main.util import check_withholding
 
 
 @bp.route("/", methods=['GET', 'POST'])
 @bp.route("/index", methods=['GET', 'POST'])
 @login_required
+@check_withholding
 def index():
     form = CheckInForm()
     form.bike.choices = [(bike.id, bike.number)
@@ -20,7 +22,7 @@ def index():
         # Update Bike table
         bike = Bike.query.filter_by(id=form.bike.data).first()
         bike.status = 'in use'
-        bike.holder = current_user.id
+        current_user.withholding = True
 
         # Update Log table
         db.session.add(Log(user=current_user.username,
@@ -36,6 +38,7 @@ def index():
 
 
 @bp.route('/timer', methods=['GET', 'POST'])
+@login_required
 def timer():
     log = Log.query.filter_by(
         user=current_user.username, check_out=None).first()
@@ -48,11 +51,14 @@ def timer():
         log.check_out = datetime.now()
 
         # Update bike table:
-        bike = Bike.query.filter_by(number=log.bike)
+        bike = Bike.query.filter_by(number=log.bike).first()
         bike.status = "available"
-        bike.holder = None
+
+        # Update user table:
+        current_user.withholding = False
 
         db.session.commit()
+
         flash('Check out sucessfully!')
         return redirect(url_for('main.index'))
 
