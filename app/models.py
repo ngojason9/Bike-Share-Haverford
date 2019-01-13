@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from time import time
 import jwt
+from flask import current_app
 
 
 class User(UserMixin, db.Model):
@@ -11,7 +12,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
-    withholding_bike = db.relationship('Bike', backref='user', lazy='dynamic')
+    withholding = db.Column(db.Boolean, default=False)
     last_seen = db.Column(db.DateTime, default=datetime.now)
 
     def __repr__(self):
@@ -44,7 +45,6 @@ class Bike(db.Model):
     number = db.Column(db.Integer, index=True, unique=True)
     status = db.Column(db.Enum('out of service', 'available',
                                'in use', name='status'), default='available')
-    holder = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
         return '<Bike #{}, status: {}>'.format(self.number, self.status)
@@ -54,10 +54,13 @@ class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String(64))
     bike = db.Column(db.Integer)
-    check_out = db.Column(db.DateTime)
+    check_out = db.Column(db.DateTime, default=None)
     check_in = db.Column(db.DateTime)
     location_out = db.Column(db.String(64))
     location_in = db.Column(db.String(64))
+
+    def __repr__(self):
+        return '<Bike {} checked out by {} at {}>'.format(self.bike, self.user, self.check_in)
 
 
 @login.user_loader
