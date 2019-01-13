@@ -3,8 +3,8 @@
 
 {% block app_content %}
 <h2>You have 6 hours!</h2>
-<p>Time checked-in: {{ check_in_time }} </p>
-<p>Time due: {{ due_time }} </p>
+<p>Time checked-in: {{ check_in_time.strftime('%b %d, %Y %I:%M %p') }} </p>
+<p>Time due: {{ due_time.strftime('%b %d, %Y %I:%M %p') }} </p>
 <p>Time remaining:</p>
 <div class="row">
     <div class="col-lg-6">
