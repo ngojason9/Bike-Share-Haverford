@@ -13,41 +13,54 @@ from datetime import datetime, timedelta
 @login_required
 def index():
     form = CheckInForm()
-    available_bikes = Bike.query.filter_by(status='available')
-    choices = []
-    for bike in available_bikes:
-        choices.append((bike.id, bike.number))
-    form.bike.choices = choices
+    form.bike.choices = [(bike.id, bike.number)
+                         for bike in Bike.query.filter_by(status='available')]
 
     if form.validate_on_submit():
-        # location = form.location.data
-
-        bike = Bike.query.filter_by(id=form.bike.data)
+        # Update Bike table
+        bike = Bike.query.filter_by(id=form.bike.data).first()
         bike.status = 'in use'
-        bike.last_used_by = current_user.id
-        check_in_time = datetime.now()
-        due_time = datetime.now() + timedelta(hours=6)
+        bike.holder = current_user.id
 
+        # Update Log table
+        db.session.add(Log(user=current_user.username,
+                           bike=bike.number,
+                           location_in=form.location.data,
+                           check_in=datetime.now()))
         db.session.commit()
 
         flash('Congratulations, you are now checked in!')
-
-        return redirect(url_for('main.timer', check_in_time=check_in_time.strftime('%b %d, %Y %I:%M %p'), due_time=due_time.strftime('%b %d, %Y %I:%M %p')))
+        return redirect(url_for('main.timer'))
 
     return render_template("index.html", form=form)
 
 
 @bp.route('/timer', methods=['GET', 'POST'])
 def timer():
-    check_in_time = request.args.get('check_in_time')
-    due_time = request.args.get('due_time')
+    log = Log.query.filter_by(
+        user=current_user.username, check_out=None).first()
+    due_time = log.check_in + timedelta(hours=6)
 
     form = CheckOutForm()
     if form.validate_on_submit():
+        # Update log table:
+        log.location_out = form.location.data
+        log.check_out = datetime.now()
+
+        # Update bike table:
+        bike = Bike.query.filter_by(number=log.bike)
+        bike.status = "available"
+        bike.holder = None
+
+        db.session.commit()
         flash('Check out sucessfully!')
         return redirect(url_for('main.index'))
 
-    return render_template('timer.html', form=form, check_in_time=check_in_time, due_time=due_time, seconds=6*3600)
+    return render_template('timer.html',
+                           form=form,
+                           check_in_time=log.check_in,
+                           due_time=due_time,
+                           seconds=int((due_time-datetime.now()).total_seconds()))
 
 
 @bp.route('/user/<username>')
