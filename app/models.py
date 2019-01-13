@@ -44,6 +44,7 @@ class Bike(db.Model):
     number = db.Column(db.Integer, index=True, unique=True)
     status = db.Column(db.Enum('out of service', 'available',
                                'in use', name='status'), default='available')
+    location = db.Column(db.String(64), default="Apartments")
     holder = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def __repr__(self):
@@ -52,10 +53,12 @@ class Bike(db.Model):
 
 class Log(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    check_in = db.Column(db.DateTime)
-    check_out = db.Column(db.DateTime)
     user = db.Column(db.String(64))
     bike = db.Column(db.Integer)
+    check_out = db.Column(db.DateTime)
+    check_in = db.Column(db.DateTime)
+    location_out = db.Column(db.String(64))
+    location_in = db.Column(db.String(64))
 
 
 @login.user_loader
