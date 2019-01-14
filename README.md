@@ -9,7 +9,7 @@ The Blue Bike Share Program was offered by the Committee of Environmental Respon
 ### Prerequisites
 - `Python 3.6`
 - `pip`
-- `virtualenv`
+- `virtualenv`\
 
 ### Installing
 First, clone the repository to your local machine
@@ -28,11 +28,7 @@ $ pip install -r requirements.txt
 ### Usage
 Now that you have installed all the dependencies, run the command `$ flask run` in the virtual environment to test the application.
 
-#### Home Page
-![Haverford Bike Share Program Home Page](/screenshots/home_page.png?raw=true "Home Page")
-
-#### Timer Starts
-![Haverford Bike Share Program Timer Page](/screenshots/timer_page.png?raw=true "Timer Page")
+![Home Page Screencast](screenshots/myimage.gif)
 
 
 ## Deployment
