@@ -3,10 +3,6 @@ from wtforms import StringField, BooleanField, SubmitField, IntegerField, Select
 from wtforms.validators import DataRequired
 from app.models import User, Bike
 
-class ContactForm(FlaskForm):
-    message = TextAreaField('Message', render_kw={"rows": 5})
-    submit = SubmitField('Send')
-
 
 class CheckOutForm(FlaskForm):
     location = SelectField('Bike Location', choices=[(

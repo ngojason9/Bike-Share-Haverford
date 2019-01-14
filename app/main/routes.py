@@ -1,13 +1,13 @@
 from flask import render_template, flash, redirect, url_for, request, current_app
 from app import db
 from app.main import bp
-from app.main.forms import CheckInForm, CheckOutForm, ContactForm
+from app.main.forms import CheckInForm, CheckOutForm
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Bike, Log
 from werkzeug.urls import url_parse
 from datetime import datetime, timedelta
 from app.main.util import check_withholding
-from app.email import send_email
+
 
 @bp.route("/", methods=['GET', 'POST'])
 @bp.route("/index", methods=['GET', 'POST'])
@@ -81,16 +81,3 @@ def before_request():
     if current_user.is_authenticated:
         current_user.last_seen = datetime.now()
         db.session.commit()
-
-
-@bp.route('/contact', methods=['GET', 'POST'])
-def contact():
-    form = ContactForm()
-    if form.validate_on_submit():
-        send_email('[Bikeshare] Contact Form Submission', sender=current_app.config['ADMINS'][0], recipients=['ngojason9@gmail.com'], text_body=render_template(
-        'contact_email.txt', body=form.message.data, user=current_user), html_body=render_template('contact_email.html', body=form.message.data, user=current_user))
-
-        flash('Thank you for your message!')
-        return redirect(url_for('main.index'))
-
-    return render_template('contact.html', form=form)
