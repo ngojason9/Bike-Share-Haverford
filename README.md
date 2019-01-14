@@ -30,8 +30,21 @@ Now that you have installed all the dependencies, run the command `$ flask run` 
 
 ![Home Page Screencast](screenshots/myimage.gif)
 
+#### Email Feature
+To fully test the email feature of the app, set the following variables in your config file:
+```
+MAIL_DEBUG = True
+MAIL_SERVER = '<your-email-server'>
+MAIL_PORT = <your-email-port>
+MAIL_USE_TLS = <your-email-TLS-setting>
+MAIL_USERNAME = <'your-email-address'>
+MAIL_PASSWORD = <'your-email-password'>
+```
 
 ## Deployment
-*The web app is still in development and is not ready for deployment. Contribution to the app is appreciated.*
+The project is now live on bikeshare.jasonngo.net (initial deployment). More developing work is still needed.
 
 ## Acknowledgement
+
+## Contact
+Please email me at ngojason9@gmail.com with any questions or suggestions.
