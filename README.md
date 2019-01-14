@@ -9,7 +9,7 @@ The Blue Bike Share Program was offered by the Committee of Environmental Respon
 ### Prerequisites
 - `Python 3.6`
 - `pip`
-- `virtualenv`\
+- `virtualenv`
 
 ### Installing
 First, clone the repository to your local machine
